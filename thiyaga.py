@@ -20,6 +20,12 @@ import seaborn as sns # type: ignore
 # database = client[db_name]
 # collection = database[collection_name]
 
+uri = "mongodb+srv://Thiyaga:1234@cluster0.zpln3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+db = client['Diabetes_Prediction']
+collection = db["Prediction"]
+
 
 # Function to load the model
 def load_model(model_name):
@@ -126,7 +132,8 @@ def main():
             
         #
             
-            #collection.insert_one(document)
+            collection.insert_one({'data':[user_data["quantitative measure of disease progression"]]})
+            collection.insert_one(user_data)
         
         # Display Results
         st.markdown(f"## 🎯 Prediction Result")
